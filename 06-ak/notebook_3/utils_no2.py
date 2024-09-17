@@ -137,6 +137,7 @@ def no2_column_cams_simple(no2_cams, z_hl):
 
 def no2_column_cams_interp(no2_cams, z_hl_cams, pres_CAMS_fl, AK_trop, fl_fields, valindex):
     
+    from scipy.interpolate import interp2d
     
     # Vertically interpolate kernells
     a, b, c = pres_CAMS_fl.shape
@@ -265,6 +266,27 @@ def xesmf_conservative_cams_s5p(scanlines, ground_pixels, var, ds_GL, lonmin, lo
     
 
     return data_out
+
+
+def bilin_regrid_cams_s5p(no2_cams, lat_cams, lon_cams, lat_s5p, lon_s5p):
+
+    from scipy.interpolate import interp2d
+    
+    nlat, nlon = lat_s5p.shape
+    regrid_no2 = np.zeros((8,nlat,nlon))*np.nan
+    
+    for i in range(8):
+        
+        regridder = interp2d(lon_cams, lat_cams, no2_cams[i,:,:], kind='linear', fill_value=np.nan)
+    
+        for x in range(nlat):
+            for y in range (nlon):
+                
+                regrid_no2[i,x,y] = regridder(lon_s5p[x,y],lat_s5p[x,y]) 
+    
+    return regrid_no2
+
+
 
 def pressure_alts_tm5(scanlines, ground_pixels, tm5_a, tm5_b, sp, AK):
     """        

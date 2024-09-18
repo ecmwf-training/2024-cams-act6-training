@@ -232,42 +232,6 @@ def grid_bounds(scanlines, ground_pixels, ds_GL):
 
 
 
-def xesmf_conservative_cams_s5p(scanlines, ground_pixels, var, ds_GL, lonmin, lonmax, latmin, latmax, dlon_out, dlat_out, lon_b, lat_b, lon_in, lat_in):
-    """
-    Conservative regridding using xesmf
-    Requires as input and returns xr.dataarray
-    """
-    import xesmf as xe
-    
-    # Define imput EMEP grid for xesmf (arguments are boundaries, not cell centres)
-    ds_inp = xe.util.grid_2d(lonmin, lonmax-0.0000000001, dlon_out, latmin, latmax-0.0000000001, dlat_out)
-
-
-    # Define output tropomi grid for xesmf
-
-    # Create extra dimensions to account for cell boundaries
-    scanline_b = np.linspace(0, scanlines, scanlines+1)
-    ground_pixel_b = np.linspace(0, ground_pixels, ground_pixels+1)
-    
-    
-    # create a dummy array to be merged with original data aiming to add
-    # the above dimensions
-    ds_out = xr.DataArray(lon_b, coords=[scanline_b, ground_pixel_b], dims=['scanline_b', 'ground_pixel_b'])
-    ds_out = ds_out.to_dataset(name='example_field')
-    # add cell boundary coordinates
-    ds_out.coords['lon_b'] = (('scanline_b', 'ground_pixel_b'), lon_b)
-    ds_out.coords['lat_b'] = (('scanline_b', 'ground_pixel_b'), lat_b)
-    ds_out.coords['lon'] = (('scanline', 'ground_pixel'), lon_in)
-    ds_out.coords['lat'] = (('scanline', 'ground_pixel'), lat_in)
-    
-    regridder = xe.Regridder(ds_inp, ds_out, 'conservative', unmapped_to_nan=True)
-    
-    data_out = regridder(var)
-    
-
-    return data_out
-
-
 def bilin_regrid_cams_s5p(no2_cams, lat_cams, lon_cams, lat_s5p, lon_s5p):
 
     from scipy.interpolate import interp2d

@@ -10,4 +10,5 @@ dependencies:
   - xarray
   - matplotlib
   - cartopy
+  - seaborn
   - jupyterlab-myst

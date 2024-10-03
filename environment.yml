@@ -1,6 +1,6 @@
 dependencies:
-  - python>=3.11
-  - cdsapi==0.7.2
+  - python=3.11
+  - cdsapi=0.7.2
   - numpy
   - netCDF4
   - pandas

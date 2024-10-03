@@ -1,5 +1,8 @@
+name: act6-env
+channels:
+  - conda-forge
 dependencies:
-  - python=3.11
+  - python=>3.11
   - cdsapi=0.7.2
   - numpy
   - netCDF4

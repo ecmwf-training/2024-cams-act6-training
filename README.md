@@ -55,4 +55,4 @@ Another option is to run the notebooks locally on your own computer. To do this 
 
 -	[Copernicus Data Space](https://dataspace.copernicus.eu/). Access to data and services from the Sentinel missions.
 -	[EUMETSAT Earth Observation Portal](https://eoportal.eumetsat.int/). Access to data disseminated by EUMETSAT.
--	[Atmosphere Data Store (ADS)](https://ads-beta.atmosphere.copernicus.eu/). Access to data from the Copernicus Atmosphere Monitoring Service (CAMS). Having registered, obtain your [API key here](https://ads-beta.atmosphere.copernicus.eu/how-to-api). Note that there is a recent new Beta version of the ADS, so even if you have an existing account, you will [need to upgrade](https://confluence.ecmwf.int/display/CKB/Please+read%3A+CDS+and+ADS+migrating+to+new+infrastructure%3A+Common+Data+Store+%28CDS%29+Engine).
+-	[Atmosphere Data Store (ADS)](https://ads.atmosphere.copernicus.eu/). Access to data from the Copernicus Atmosphere Monitoring Service (CAMS). Having registered, obtain your [API key here](https://ads.atmosphere.copernicus.eu/how-to-api).
